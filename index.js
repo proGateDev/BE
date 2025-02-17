@@ -1,49 +1,13 @@
-
-const express = require("express");
+const express = require('express');
 const app = express();
-const cors = require("cors");
-require("dotenv").config();
-require("./database");
-const routes = require('./routes');
+const port = process.env.PORT || 3000;
 
-const { socketService } = require('./service/socket'); // Import the socket service
-
-//====================================================
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-// });
-//====================================================
-// Use the session middleware
-
-app.use(
-  cors({
-    origin: "*",
-  })
-);
-app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-
-//====================================================
-const coldStartSolution = () => {
-  setTimeout(() => {
-    // axios.get
-    console.log("-------- Cold Start -------------")
-  }, 1000)
-  coldStartSolution();
-}
-app.get("/", (req, res) => {
-  res.send("<h1> DigiCare Server </h1>");
-});
-//===================================================
-app.use(routes)
-
-const server = app.listen(process.env.PORT, () => {
-  console.log(`Server started on PORT : ${process.env.PORT}`);
+// Basic route for GET requests to the root URL
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
-// Initialize Socket Service
-socketService(server);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

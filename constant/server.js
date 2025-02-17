@@ -1,1 +1,0 @@
-const supabaseDbPassword = 'GvOhTNv4intTi85z'
